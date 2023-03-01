@@ -1,23 +1,21 @@
 ## SETUP
-
-## Ambiente de DEV
 ### Setup recomendado para Windows (Visual Studio Code + WSL2 + Docker + Git)
 Subsistema recomendado: [Ubuntu](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10#1-overview).
 
-**[Visual Studio Code](https://code.visualstudio.com/download)**
-**[Postman](https://www.postman.com/downloads/)**
-**[Docker for Windows](https://docs.docker.com/desktop/install/windows-install/)**
-**[WSL2](https://docs.microsoft.com/pt-br/windows/wsl/install-win10)**
-**[Git](https://git-scm.com/download/win)**
-**[VS code + Docker + WSL2](https://code.visualstudio.com/blogs/2020/03/02/docker-in-wsl2)**
+- **[Visual Studio Code](https://code.visualstudio.com/download)**
+- **[Postman](https://www.postman.com/downloads/)**
+- **[Docker for Windows](https://docs.docker.com/desktop/install/windows-install/)**
+- **[WSL2](https://docs.microsoft.com/pt-br/windows/wsl/install-win10)**
+- **[Git](https://git-scm.com/download/win)**
+- **[VS code + Docker + WSL2](https://code.visualstudio.com/blogs/2020/03/02/docker-in-wsl2)**
 
 ### **Setup recomendado para Linux** (Visual Studio Code + Docker + Git)
 Distro recomendada: [Ubuntu](https://ubuntu.com/download/desktop).
 
-**[Visual Studio Code](https://code.visualstudio.com/download)**
-**[Postman](https://www.postman.com/downloads/)**
-**[Docker](https://docs.docker.com/engine/install/ubuntu/)**
-**[Git](https://git-scm.com/book/pt-br/v2/Come%C3%A7ando-Instalando-o-Git)**
+- **[Visual Studio Code](https://code.visualstudio.com/download)**
+- **[Postman](https://www.postman.com/downloads/)**
+- **[Docker](https://docs.docker.com/engine/install/ubuntu/)**
+- **[Git](https://git-scm.com/book/pt-br/v2/Come%C3%A7ando-Instalando-o-Git)**
 
 ## Começando
 Para subir o projeto vai precisar:
