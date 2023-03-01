@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post("/registro", [App\Http\Controllers\RegistroController::class, "registrar"])->middleware("valida.token");
+
+Route::get('/naoAutenticado', function() {
+    return response()->json(["error" => "Não possui credenciais válidas para o recurso solicitado"], 401);
+})->name("naoAutenticado");
+
+Route::middleware("auth:sanctum")->group(function() {
+    Route::apiResource("comandas", "\App\Http\Controllers\ComandaController");
+});
