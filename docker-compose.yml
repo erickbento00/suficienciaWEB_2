@@ -1,0 +1,47 @@
+version: "3.3"
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: ./docker/dev/Dockerfile
+    container_name: api-web2
+    restart: unless-stopped
+    working_dir: /var/www/
+    networks:
+      - web2
+    volumes:
+      - ./api:/var/www
+
+  db:
+    image: mysql:8.0
+    container_name: db-web2
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=api-web2
+      - MYSQL_ROOT_PASSWORD=furb123
+      - MYSQL_PASSWORD=furb123
+      - MYSQL_USER=furb
+      - SERVICE_NAME=mysql
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - web2
+
+  nginx:
+    image: bitnami/nginx:1.23.1-debian-11-r19
+    container_name: nginx-web2
+    restart: unless-stopped
+    depends_on:
+      - api
+    networks:
+      - web2
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-conf:/opt/bitnami/nginx/conf/server_blocks
+
+networks:
+  web2:
+    driver: bridge
