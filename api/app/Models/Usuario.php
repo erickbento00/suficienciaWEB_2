@@ -26,4 +26,10 @@ class Usuario extends Model {
             "string" => "O campo :attribute é do tipo string",
         ];
     }
+
+    // Relacionamento
+    public function comanda() {
+        // UM usuario POSSUI MUITAS comandas
+        return $this->hasMany(Comanda::class);
+    }
 }

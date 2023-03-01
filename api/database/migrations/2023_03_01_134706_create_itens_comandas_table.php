@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("produto_id");
             $table->unsignedBigInteger("comanda_id");
+            $table->string("nome", 50);
+            $table->decimal("preco");
             $table->timestamps();
 
             // Foreign key
             $table->foreign("produto_id")->references("id")->on("produtos");
-            $table->foreign("comanda_id")->references("id")->on("comandas");
+            $table->foreign("comanda_id")->references("id")->on("comandas")->onDelete('cascade');
         });
     }
 

@@ -36,4 +36,15 @@ class Comanda extends Model {
             "produtos.*.regex" => "O campo :attribute tem que ser um valor valido em float. Ex.: 12.00"
         ];
     }
+
+    // Relacionamento
+    public function usuario() {
+        // UMA comanda PERTENCE a UM usuario
+        return $this->belongsTo(Usuario::class, "idUsuario");
+    }
+
+    public function produto(){
+        // Muito para muito, defino uma tabela intermediaria
+        return $this->belongsToMany(Produto::class, "itens_comandas", "comanda_id", "produto_id")->withPivot(['nome','preco']);
+    }
 }

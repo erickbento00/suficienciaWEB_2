@@ -29,4 +29,9 @@ class Produto extends Model {
             "regex" => "O campo :attribute tem que ser um valor valido em float. Ex.: 12.00"
         ];
     }
+
+    public function comanda(){
+        // Muitos para muitos, defino uma tabela intermediaria
+        return $this->belongsToMany(Comanda::class, "itens_comandas", "produto_id", "comanda_id")->withPivot(['nome','preco']);
+    }
 }
