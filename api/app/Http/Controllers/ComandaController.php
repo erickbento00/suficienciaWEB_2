@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comanda;
-use App\Models\Produto;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 class ComandaController extends Controller {
+    private $comanda;
     private $usuario;
-    private $produto;
 
-    public function __construct(Usuario $usuario, Produto $produto){
+    public function __construct(Comanda $comanda, Usuario $usuario){
+        $this->comanda = $comanda;
         $this->usuario = $usuario;
-        $this->produto = $produto;
     }
 
     /**
