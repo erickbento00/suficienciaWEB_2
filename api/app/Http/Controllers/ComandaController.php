@@ -18,6 +18,50 @@ class ComandaController extends Controller {
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @OA\Get(
+     *      path="/comandas",
+     *      tags={"COMANDAS"},
+     *      summary="Retorna as informações da cada comanda, podendo ter varias comandas pro mesmo usuario",
+     *      description="Retorna as informações da cada comanda, podendo ter varias comandas pro mesmo usuario",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  example={
+     *                      {
+     *                          "idUsuario": 1,
+     *                          "nomeUsuario": "erick",
+     *                          "telefoneUsuario": "4712341234"
+     *                      },
+     *                      {
+     *                          "idUsuario": 1,
+     *                          "nomeUsuario": "erick",
+     *                          "telefoneUsuario": "4712341234"
+     *                      },
+     *                      {
+     *                          "idUsuario": 2,
+     *                          "nomeUsuario": "kcire",
+     *                          "telefoneUsuario": "4712341234"
+     *                      },
+     *                  }
+     *              )
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      ),
+     *      @OA\PathItem (
+     *      ),
+     * )
+     */
     public function index() {
         $comandas = $this->comanda->with('usuario', 'produto')->get();
 
@@ -39,6 +83,77 @@ class ComandaController extends Controller {
 
     /**
      * Store a newly created resource in storage.
+     */
+    /**
+     * @OA\Post(
+     *      path="/comandas",
+     *      tags={"COMANDAS"},
+     *      summary="Adiciona novas comandas, usuarios e produtos",
+     *      description="Adiciona novas comandas, usuarios e produtos",
+     *      @OA\RequestBody(
+     *          required = true,
+     *          description = "",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  example={
+     *                      "idUsuario":1,
+     *                      "nomeUsuario":"erick",
+     *                      "telefoneUsuario":"4712341234",
+     *                      "produtos":{
+     *                          {
+     *                              "id":1,
+     *                              "nome":"X-Salada",
+     *                              "preco":30
+     *                          },
+     *                          {
+     *                              "id":2,
+     *                              "nome":"X-Bacon",
+     *                              "preco":35
+     *                          }
+     *                      }
+     *                  },
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  example={
+     *                      "id": 1,
+     *                      "idUsuario":1,
+     *                      "nomeUsuario":"erick",
+     *                      "telefoneUsuario":"4712341234",
+     *                      "produtos":{
+     *                          {
+     *                              "id":1,
+     *                              "nome":"X-Salada",
+     *                              "preco":30
+     *                          },
+     *                          {
+     *                              "id":2,
+     *                              "nome":"X-Bacon",
+     *                              "preco":35
+     *                          }
+     *                      }
+     *                  }
+     *              )
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      ),
+     *      @OA\PathItem (
+     *      ),
+     * )
      */
     public function store(Request $request) {
         $request->validate($this->comanda->rules(), $this->comanda->feedback());
@@ -86,6 +201,61 @@ class ComandaController extends Controller {
     /**
      * Display the specified resource.
      */
+    /**
+     * @OA\Get(
+     *      path="/comandas/{id}",
+     *      tags={"COMANDAS"},
+     *      summary="Retorna as informações de uma comanda especifica",
+     *      description="As informações da comanda consiste nas informações dos usuarios e seus itens, com nome e valor",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          description="Código da comanda",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer",
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  example={
+     *                      {
+     *                          "idUsuario": 1,
+     *                          "nomeUsuario": "erick",
+     *                          "telefoneUsuario": "4712341234",
+     *                          "produtos": {
+     *                              {
+     *                                  "id": 1,
+     *                                  "nome": "X-Salada",
+     *                                  "preco": "20.00"
+     *                              },
+     *                              {
+     *                                  "id": 2,
+     *                                  "nome": "X-Bacon",
+     *                                  "preco": "15.00"
+     *                              }
+     *                          }
+     *                      }
+     *                  }
+     *              )
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      ),
+     *      @OA\PathItem (
+     *      ),
+     * )
+     */
     public function show($id) {
         $comanda = $this->comanda->with('usuario', 'produto')->where("id", $id);
         
@@ -115,6 +285,60 @@ class ComandaController extends Controller {
     /**
      * Update the specified resource in storage.
      */
+    /**
+     * @OA\Put(
+     *      path="/comandas/{id}",
+     *      tags={"COMANDAS"},
+     *      summary="Atualiza as informações dos itens da comanda",
+     *      description="Atualiza as informações dos itens da comanda",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          description="Código da comanda",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer",
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required = true,
+     *          description = "",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  example={
+     *                      "produtos":{
+     *                          {
+     *                              "id":1,
+     *                              "nome":"X-Salada",
+     *                              "preco":20
+     *                          },
+     *                          {
+     *                              "id":2,
+     *                              "nome":"X-Bacon",
+     *                              "preco":15
+     *                          }
+     *                      }
+     *                  },
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      ),
+     *      @OA\PathItem (
+     *      ),
+     * )
+     */
     public function update(Request $request, $id) {
         if($request->method() === 'PATCH'){
             return response()->json(["error" => "Favor utilizar metodo PUT"], 405);
@@ -132,13 +356,13 @@ class ComandaController extends Controller {
         $regraDinamicas["produtos.*.preco"] = "required|regex:/^\d+(\.\d{1,2})?$/";
         $request->validate($regraDinamicas, $this->comanda->feedback());
 
-        $itens = DB::table("itens_comandas")->where("comanda_id", $id)->whereIn("id", $request->input("produtos.*.id"));
+        $itens = DB::table("itens_comandas")->where("comanda_id", $id)->whereIn("produto_id", $request->input("produtos.*.id"));
         if(!$itens->exists()){
             return response()->json(["error" => ["text" => "comanda invalida"]], 404);
         }
 
         foreach($request->produtos as $produto){
-            DB::table("itens_comandas")->where("comanda_id", $id)->where("id", $produto["id"])->update([
+            DB::table("itens_comandas")->where("comanda_id", $id)->where("produto_id", $produto["id"])->update([
                 "nome" => $produto["nome"],
                 "preco" => $produto["preco"]
             ]);
@@ -147,6 +371,47 @@ class ComandaController extends Controller {
 
     /**
      * Remove the specified resource from storage.
+     */
+    /**
+     * @OA\Delete(
+     *      path="/comandas/{id}",
+     *      tags={"COMANDAS"},
+     *      summary="Exclui as informações da comanda",
+     *      description="Exclui as informações da comanda",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          description="Código da comanda",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer",
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  example={
+     *                      "success": {
+     *                          "text": "comanda invalida"
+     *                      }
+     *                  }
+     *              )
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      ),
+     *      @OA\PathItem (
+     *      ),
+     * )
      */
     public function destroy($id) {
         $comanda = $this->comanda->with('usuario', 'produto')->where("id", $id);

@@ -1,0 +1,337 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API WEB 2 - Documentação",
+        "description": "Com finalidade de validar materia",
+        "contact": {
+            "name": "FURB",
+            "url": "https://www.furb.br/pt"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api",
+            "description": "Base URL"
+        }
+    ],
+    "paths": {
+        "/comandas": {
+            "get": {
+                "tags": [
+                    "COMANDAS"
+                ],
+                "summary": "Retorna as informações da cada comanda, podendo ter varias comandas pro mesmo usuario",
+                "description": "Retorna as informações da cada comanda, podendo ter varias comandas pro mesmo usuario",
+                "operationId": "7375dc6a2a72637751fdcdd784c2cec4",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "idUsuario": 1,
+                                            "nomeUsuario": "erick",
+                                            "telefoneUsuario": "4712341234"
+                                        },
+                                        {
+                                            "idUsuario": 1,
+                                            "nomeUsuario": "erick",
+                                            "telefoneUsuario": "4712341234"
+                                        },
+                                        {
+                                            "idUsuario": 2,
+                                            "nomeUsuario": "kcire",
+                                            "telefoneUsuario": "4712341234"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "COMANDAS"
+                ],
+                "summary": "Adiciona novas comandas, usuarios e produtos",
+                "description": "Adiciona novas comandas, usuarios e produtos",
+                "operationId": "e9631166c834843097c268cba6f624e4",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "idUsuario": 1,
+                                    "nomeUsuario": "erick",
+                                    "telefoneUsuario": "4712341234",
+                                    "produtos": [
+                                        {
+                                            "id": 1,
+                                            "nome": "X-Salada",
+                                            "preco": 30
+                                        },
+                                        {
+                                            "id": 2,
+                                            "nome": "X-Bacon",
+                                            "preco": 35
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "id": 1,
+                                        "idUsuario": 1,
+                                        "nomeUsuario": "erick",
+                                        "telefoneUsuario": "4712341234",
+                                        "produtos": [
+                                            {
+                                                "id": 1,
+                                                "nome": "X-Salada",
+                                                "preco": 30
+                                            },
+                                            {
+                                                "id": 2,
+                                                "nome": "X-Bacon",
+                                                "preco": 35
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/comandas/{id}": {
+            "get": {
+                "tags": [
+                    "COMANDAS"
+                ],
+                "summary": "Retorna as informações de uma comanda especifica",
+                "description": "As informações da comanda consiste nas informações dos usuarios e seus itens, com nome e valor",
+                "operationId": "76b99d7599120455057cbef8863fe1ec",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Código da comanda",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "idUsuario": 1,
+                                            "nomeUsuario": "erick",
+                                            "telefoneUsuario": "4712341234",
+                                            "produtos": [
+                                                {
+                                                    "id": 1,
+                                                    "nome": "X-Salada",
+                                                    "preco": "20.00"
+                                                },
+                                                {
+                                                    "id": 2,
+                                                    "nome": "X-Bacon",
+                                                    "preco": "15.00"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "COMANDAS"
+                ],
+                "summary": "Atualiza as informações dos itens da comanda",
+                "description": "Atualiza as informações dos itens da comanda",
+                "operationId": "1b2c06c059c2f0b31d46b6dde0e48b8c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Código da comanda",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "produtos": [
+                                        {
+                                            "id": 1,
+                                            "nome": "X-Salada",
+                                            "preco": 20
+                                        },
+                                        {
+                                            "id": 2,
+                                            "nome": "X-Bacon",
+                                            "preco": 15
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "COMANDAS"
+                ],
+                "summary": "Exclui as informações da comanda",
+                "description": "Exclui as informações da comanda",
+                "operationId": "4ea6a881bc50122e948fd29b985a673f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Código da comanda",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "success": {
+                                            "text": "comanda invalida"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/registro": {
+            "post": {
+                "tags": [
+                    "TOKEN"
+                ],
+                "summary": "Gera um token de acesso",
+                "description": "Gera um token de acesso",
+                "operationId": "e27018fe363d6f30e3fedff415e28d53",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "nome": "erick",
+                                    "password": "FURB"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ]
+}
